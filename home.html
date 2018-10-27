@@ -42,31 +42,33 @@
         </div>
         <script type="text/javascript">
             //loop for every time bookmarklet prompt is answered
-            let yesorno=prompt("yes, maybe or no");
-            let newURL = window.location.protocol + "//" + window.location.host + "/" + window.location.pathname + window.location.search
+            let decodeThis = location.href.slice(27,-10)
+            let newhref = decodeURIComponent(location.href)
+            let yesorno; // too lazy to do this part rn
+
             if (yesorno=='yes'){
                 var newDiv = document.createElement("div");
-                var node = document.createTextNode(newURL);
+                var node = document.createTextNode(newhref);
                 newDiv.appendChild(node);
                 var element = document.getElementById("educational");
                 element.appendChild(newDiv);
             }
             if (yesorno=='maybe'){
                 var newDiv = document.createElement("div");
-                var node = document.createTextNode(newURL);
+                var node = document.createTextNode(newhref);
                 newDiv.appendChild(node);
                 var element = document.getElementById("grey");
                 element.appendChild(newDiv);
             }
             if (yesorno=='no'){
                 var newDiv = document.createElement("div");
-                var node = document.createTextNode(newURL);
+                var node = document.createTextNode(newhref);
                 newDiv.appendChild(node);
                 var element = document.getElementById("uneducational");
                 element.appendChild(newDiv);
             }
             
-            alert(num+num1)
+            // let newURL = window.location.protocol + "//" + window.location.host + "/" + window.location.pathname + window.location.search
         </script>
     </body>
 </html>
