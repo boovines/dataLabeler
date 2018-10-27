@@ -2,27 +2,26 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose')
 var labelModel = require('./schema.js').getModel()
-
 var http = require('http');
 var path = require('path');
 var fs = require('fs')
-var app = express();
-var server = http.createServer(app);
-var port = process.env.PORT ? parseInt(process.env.PORT) : 8080;
 
 var app = express()
-    , dbUri = process.env. MONGODB_RUI || 'mongodb://127.0.0.1/knowledge';
-
+    , dbUri = process.env. MONGODB_RUI || 'mongodb://127.0.0.1/knowledge'
+    , server = http.createServer(app)
+    , port = process.env.PORT ? parseInt(proces.env.PORT) : 8080;
+;
 
 function startServer() {
-
+  app.use(bodyParser.json({
+    limit: '16mb'
+  }))
   app.use(express.static(path.join(__dirname, 'public')));
 
   app.get('/', (req, res, next) => {
-    var filePath = path.join(__dirname, '/home.html')
-    res.send("OK")
-    res.sendFile(filePath)
-  })
+    console.log(req.query)
+    res.redirect(req.query.url)
+  });
 
 
   server.on('listening', () => {
@@ -40,10 +39,10 @@ function startServer() {
   /* Tells the server to start listening to requests from defined port */
   server.listen(port);
 }
+startServer()
 
-mongoose.connect(dbUri, function(err){
-    if (err){
-        return console.log(err)
-    }
-    startServer()
-})
+// mongoose.connect(dbUri, function(err){
+//     if (err){
+//         return console.log(err)
+//     }
+// })
