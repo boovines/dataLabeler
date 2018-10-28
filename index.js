@@ -20,7 +20,14 @@ function startServer() {
 
   app.get('/', (req, res, next) => {
     console.log(req.query)
-    // req.query.save()
+    var label = new labelModel({
+          date: new Date()
+        , url: req.query.url
+        , label: req.query.label
+        
+    });
+    label.save()
+
     res.redirect(req.query.url)
   });
 
@@ -42,8 +49,8 @@ function startServer() {
 }
 startServer()
 
-// mongoose.connect(dbUri, function(err){
-//     if (err){
-//         return console.log(err)
-//     }
-// })
+mongoose.connect(dbUri, function(err){
+    if (err){
+        return console.log(err)
+    }
+})
