@@ -20,6 +20,7 @@ function startServer() {
 
   app.get('/', (req, res, next) => {
     console.log(req.query)
+    // req.query.save()
     res.redirect(req.query.url)
   });
 

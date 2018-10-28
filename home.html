@@ -33,6 +33,7 @@
                 grid-area: unedChild;
             }
         </style>
+        <script type="text/javascript" src="index.js" defer="defer"></script>
     </head>
     <body>
         <div id="container">
@@ -42,30 +43,33 @@
         </div>
         <script type="text/javascript">
             //loop for every time bookmarklet prompt is answered
-            let decodeThis;
-            let newhref = decodeURIComponent(location.href)
-            let yesorno; // too lazy to do this part rn
+            function addToPage(url){
+                var key = Object.keys(req.query)[0];
+                var key1 = Object.keys(req.query)[1];
+                var yesorno = req.query[key]
+                var newhref = req.query[key1]
 
-            if (yesorno=='yes'){
-                var newDiv = document.createElement("div");
-                var node = document.createTextNode(newhref);
-                newDiv.appendChild(node);
-                var element = document.getElementById("educational");
-                element.appendChild(newDiv);
-            }
-            if (yesorno=='maybe'){
-                var newDiv = document.createElement("div");
-                var node = document.createTextNode(newhref);
-                newDiv.appendChild(node);
-                var element = document.getElementById("grey");
-                element.appendChild(newDiv);
-            }
-            if (yesorno=='no'){
-                var newDiv = document.createElement("div");
-                var node = document.createTextNode(newhref);
-                newDiv.appendChild(node);
-                var element = document.getElementById("uneducational");
-                element.appendChild(newDiv);
+                if (yesorno=='yes'){
+                    var newDiv = document.createElement("div");
+                    var node = document.createTextNode(newhref);
+                    newDiv.appendChild(node);
+                    var element = document.getElementById("educational");
+                    element.appendChild(newDiv);
+                }
+                if (yesorno=='maybe'){
+                    var newDiv = document.createElement("div");
+                    var node = document.createTextNode(newhref);
+                    newDiv.appendChild(node);
+                    var element = document.getElementById("grey");
+                    element.appendChild(newDiv);
+                }
+                if (yesorno=='no'){
+                    var newDiv = document.createElement("div");
+                    var node = document.createTextNode(newhref);
+                    newDiv.appendChild(node);
+                    var element = document.getElementById("uneducational");
+                    element.appendChild(newDiv);
+                }
             }
             
             // let newURL = window.location.protocol + "//" + window.location.host + "/" + window.location.pathname + window.location.search
