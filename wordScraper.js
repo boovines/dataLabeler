@@ -26,13 +26,8 @@ async function scrapeSite(url){
     await page.waitFor(1000);
 
     const result = await page.evaluate(() => {
-        let data = []; 
-        let elements = document.querySelectorAll('html'); 
-        let title = document.querySelectorAll('title');
+        return document.querySelector('html').innerHTML; 
 
-        data.push({title, elements}); 
-
-        return data;
     });
 
     browser.close();
@@ -51,7 +46,7 @@ labelModel.find({}, async function(err, labels) {
 		for (var i = 0; i < labels.length; i++) {
 			var label = labels[i]
 			var url = label.url
-			label.text = await scrapeSite(url);
+            label.text = await scrapeSite(url);
 			label.save();
 			console.log("label4")
 	    }
