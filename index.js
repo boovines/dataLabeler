@@ -9,7 +9,7 @@ var fs = require('fs')
 var app = express()
     , dbUri = process.env. MONGODB_RUI || 'mongodb://127.0.0.1/knowledge'
     , server = http.createServer(app)
-    , port = process.env.PORT ? parseInt(proces.env.PORT) : 8080;
+    , port = process.env.PORT ? parseInt(proces.env.PORT) : 27018;
 ;
 
 function startServer() {
@@ -19,16 +19,20 @@ function startServer() {
   app.use(express.static(path.join(__dirname, 'public')));
 
   app.get('/', (req, res, next) => {
-    console.log(req.query)
     var label = new labelModel({
           date: new Date()
         , url: req.query.url
         , label: req.query.label
         
     });
-    label.save()
-
-    res.redirect(req.query.url)
+    console.log(req.query.label,'label')
+    if(!req.query.label){
+      res.redirect(req.query.url)
+    }else{
+      console.log('saving')
+      label.save()
+      res.redirect(req.query.url)
+    }
   });
 
 
