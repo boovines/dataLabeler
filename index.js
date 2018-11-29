@@ -30,6 +30,7 @@ function startServer() {
       res.redirect(req.query.url)
     }else{
       console.log('saving')
+      console.log(req.query.url, req.query.label)
       label.save()
       res.redirect(req.query.url)
     }
